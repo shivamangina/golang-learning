@@ -48,6 +48,20 @@ func (ll *LinkedList) Reverse() {
 	ll.Head = prev
 }
 
+func (ll *LinkedList) Reorder() {
+	var prev *ListNode
+	curr := ll.Head
+
+	for curr != nil {
+		next := curr.Next
+		curr.Next = prev
+		prev = curr
+		curr = next
+	}
+
+	ll.Head = prev
+}
+
 func (ll *LinkedList) Print() {
 	cur := ll.Head
 	for cur != nil {
@@ -58,10 +72,12 @@ func (ll *LinkedList) Print() {
 }
 
 func main() {
+	// 1,2,3,4,5
 	node1 := NewNode(1)
 	node2 := NewNode(2)
-	node3 := NewNode(5)
-	node4 := NewNode(6)
+	node3 := NewNode(3)
+	node4 := NewNode(4)
+	node5 := NewNode(5)
 
 	ll := LinkedList{
 		Head: nil,
@@ -70,11 +86,16 @@ func main() {
 	ll.Append(node1)
 	ll.Append(node2)
 	ll.Append(node3)
-	ll.Preappend(node4)
+	ll.Append(node4)
+	ll.Append(node5)
 
 	ll.Print()
 
-	ll.Reverse()
+	println("------")
+	// ll.Reverse()
+	ll.Reorder()
+
+	println("------")
 
 	ll.Print()
 
